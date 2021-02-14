@@ -1,14 +1,14 @@
 const { json } = require('body-parser');
 const path = require('path')
 var fs = require('fs');
-
+var notes;
 
 module.exports = app => {
-    var notes;
+    
     var savedNotes = fs.readFileSync('db/db.json', 'UTF-8');
 if (savedNotes) {
     var oldNotes = JSON.parse(savedNotes);
-    noteData = oldNotes;
+    notes = oldNotes;
 }
 else {
     notes = [];
@@ -23,7 +23,7 @@ app.post('/api/notes', function(req, res) {
     var newNote = req.body;
     console.log(newNote, 'its me new data');
     notes.push(newNote);
-    res.JSON(newNote);
+    res.json(newNote);
     varID();
     fs.writeFileSync('db/db.json', JSON.stringify(notes, 2), function (err) {
         if (err)
