@@ -15,37 +15,37 @@ else {
 }
 
 app.get('/api/notes', function(req, res) {
-    console.log('get me something')
+    console.log('get me notes')
     return res.json(notes);
 });
 
 app.post('/api/notes', function(req, res) {
     var newNote = req.body;
-    console.log(newNote, 'its me new data');
+    console.log(newNote, 'new data');
     notes.push(newNote);
     res.json(newNote);
     varID();
-    fs.writeFileSync('db/db.json', JSON.stringify(notes, 2), function (err) {
+    fs.writeFileSync('db/db.json', JSON.stringify(notes), function (err) {
         if (err)
         throw err
     });
 });
 
 app.delete('/api/notes/:id', function (req, res){
-    console.log(req.params.id, 'hi');
-    let deleteID = req.params.id;
+    console.log(req.params.id, 'i think this is where the problem is');
+    var deleteID = req.params.id;
     notes.splice(deleteID, 1);
     varID();
     fs.writeFileSync('db/db.json', JSON.stringify(notes), function (err) {
         if (err)
         throw err
     });
-    res.json({deletion:'success'})
-});
+    res.json({deletion:'Mission accomplished'})
+    });
 
-function varID() {
-    for (i = 0; i < notes.length; i ++) {
-        notes[i].id = i;
+    function varID() {
+        for (i = 0; i < notes.length; i ++) {
+            notes[i].id = i;
+        }
     }
-}
 }
