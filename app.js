@@ -14,5 +14,5 @@ require('./routes/htmlRoute.js')(app);
 
 
 app.listen(PORT, ()=>{
-    console.log('The app is working alright steve', PORT);
+    console.log('The app is working alright steve!', PORT);
 });
